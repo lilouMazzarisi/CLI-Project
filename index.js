@@ -1,5 +1,6 @@
 #! /usr/bin/env node
 import axios from 'axios';
+import chalk from 'chalk';
 import {getCode, getName} from 'country-list'; 
 
 const HolidaysAPIurl = "https://date.nager.at/api/v3/PublicHolidays/";
@@ -10,10 +11,8 @@ const fetchAllHolidays = async (year,countryCode) =>{
     return response.data;
 }
 
-console.log ("test"); 
+console.log (chalk.green('test')); 
 // TRANSFORM SECOND ARGUMENT TO COUNTRY CODE
-
-
 
 
 async function Holidaysloop(year,countryCode){
@@ -39,7 +38,6 @@ const displayHolidays = async () => {
             
         }else{
             let givenYear = process.argv[3]; 
-            const HolidaysData = await fetchAllHolidays(year,countryCode);
             Holidaysloop(givenYear,countryCode);
         }
     
