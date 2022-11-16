@@ -1,0 +1,23 @@
+{
+  "dependencies": {
+    "node": "^19.1.0"
+  },
+  "name": "cli-project",
+  "description": "Create our first tool in Node.js",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lilouMazzarisi/CLI-Project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lilouMazzarisi/CLI-Project/issues"
+  },
+  "homepage": "https://github.com/lilouMazzarisi/CLI-Project#readme"
+}
