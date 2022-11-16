@@ -1,28 +1,55 @@
 #! /usr/bin/env node
+import axios from 'axios';
+import {getCode, getName} from 'country-list'; 
+
+const HolidaysAPIurl = "https://date.nager.at/api/v3/PublicHolidays/";
+
+const fetchAllHolidays = async (year,countryCode) =>{
+    const response = await axios.get(`${HolidaysAPIurl}${year}/${countryCode}`)
+    // console.log(response);
+    return response.data;
+}
+
 console.log ("test"); 
+// TRANSFORM SECOND ARGUMENT TO COUNTRY CODE
 
-// import axios from 'axios'; 
 
-// const root = "https://date.nager.at/api/v3/PublicHolidays/";
 
-// async function getApi(year, countryCode){
 
-//    let response = await axios.get(`${root}{${year}}/{${countryCode}}`)
-//     console.log (response); 
-// }
-// getApi(year, countryCode); 
+async function Holidaysloop(year,countryCode){
 
-const program = require('commander');
+    const HolidaysData = await fetchAllHolidays(year,countryCode);
+    for (const holiday of HolidaysData) {
+        let name = holiday.name;
+        let date = holiday.date;   
+        let display = date + ":" + name
+        console.log(display); 
+    }
+}
+   
+// console.log(fetchAllHolidays(year,countryCode));
 
-program
-    .version('1.0.0')
-    .command('klt')
-    .description('Take Country Name as parameter')
-    .option('short', 'Country Code') 
-    .option('year', 'Gives corresponding holidays')
-    .parse(process.argv);
+const displayHolidays = async () => {
+    try{
+        let countryCode = getCode(process.argv[2]); 
+        const currentYear = new Date().getFullYear();
+        if(process.argv.length === 3){
+            
+            Holidaysloop(currentYear,countryCode);
+            
+        }else{
+            let givenYear = process.argv[3]; 
+            const HolidaysData = await fetchAllHolidays(year,countryCode);
+            Holidaysloop(givenYear,countryCode);
+        }
+    
+        // console.log(HolidaysData.length);
+        // return(HolidaysData.name + HolidaysData.date);
+    }
+    catch(error){
+                console.log("NOOO");
+    }
+}
 
-console.log(process.argv);
+displayHolidays();
 
-// const year = process.argv[2];
-// const countryCode = process.argv[3];
