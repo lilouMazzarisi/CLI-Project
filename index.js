@@ -30,8 +30,8 @@ function callText(){
 
 //LOADING SPINNER 
 const spinner = ora('Loading \n \n').start()
-
 spinner.color = 'blue';
+spinner.interval; 
 
 async function Holidaysloop(year,countryCode){
 
